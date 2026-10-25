@@ -1001,8 +1001,9 @@ export default function Admin({
                   <div className="panel setup-panel">
                     <h2>Deployment checklist</h2>
                     <p>
-                      Use the repository root in Vercel. The build configuration
-                      publishes the admin frontend and trusted API together.
+                      Deploy the repository root as a Render Node web service.
+                      The build serves the admin frontend and trusted API
+                      together.
                     </p>
                     <ol>
                       <li>Connect Firebase Auth and deploy Firestore rules.</li>

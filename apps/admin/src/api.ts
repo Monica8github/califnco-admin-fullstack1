@@ -45,7 +45,7 @@ export async function api<T = any>(
     data = await response.json();
   } catch {
     throw new Error(
-      "API unavailable. Verify the Vercel root and API deployment.",
+      "API unavailable. Verify the web service and API deployment.",
     );
   }
   if (!response.ok) throw new Error(data.error || "Request failed");

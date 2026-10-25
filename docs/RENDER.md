@@ -4,14 +4,16 @@ Deploy one Render **Web Service** from this project root. The service serves the
 
 ## Service settings
 
-- Root Directory: `califnco-admin-fullstack` (the folder containing the root `package.json`)
+- Root Directory: leave blank (the connected repository root contains `package.json`)
 - Runtime: Node
 - Node version: 24.x (the package requires Node.js 22.13 or newer)
 - Build Command: `npm ci && npm run build:deployment`
 - Start Command: `npm start`
 - Health Check Path: `/api/health`
 
-The default app selector is `admin`; set `CALIFNCO_APP=admin` if the Render service does not inherit that default. The server binds to `0.0.0.0` and uses Render's `PORT`.
+The build creates `apps/admin/dist` and copies that Vite output to root `dist`, which is the directory served by `functions/server.ts`. Set `CALIFNCO_APP=admin`. The server binds to `0.0.0.0` and listens on Render's `PORT` (defaulting to port 8787 for local startup).
+
+This repository also contains `render.yaml` as a Node Web Service Blueprint. It does not automatically change the runtime of a separately created Render service. If the existing service was created as Python, change its runtime to Node in its service settings or create a new Web Service from this repository before deploying.
 
 ## Environment variables
 
@@ -33,6 +35,8 @@ Required for Gemini captions in the existing admin AI studio:
 - `GEMINI_TEXT_MODEL=gemini-2.5-flash`
 
 `GEMINI_TEXT_MODEL` is the existing default and can be overridden if the model is not enabled for the account. The key is read only by the server; never prefix it with `VITE_`.
+
+Firebase and public web configuration are required for real login and live application data. Gemini is optional for starting the server, but required to generate Gemini captions. The health endpoint remains available when configuration is missing and reports setup state without returning credentials.
 
 Set optional integrations only when using them: `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `RAZORPAY_WEBHOOK_SECRET`, `CRON_SECRET`, `AI_IMAGE_PROVIDER`, `HF_TOKEN`, `HF_IMAGE_MODEL`, `GEMINI_IMAGE_MODEL`, Cloudinary, Instagram, email, and SMS variables from `.env.example`. Keep `INSTAGRAM_PUBLISH_ENABLED=false` until an authorized draft is reviewed.
 

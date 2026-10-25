@@ -13,4 +13,4 @@ execFileSync(
 rmSync("dist", { recursive: true, force: true });
 mkdirSync("dist", { recursive: true });
 cpSync(`apps/${app}/dist`, "dist", { recursive: true });
-console.log(`Prepared ${app} as an independent Vercel deployment.`);
+console.log(`Prepared ${app} in the root dist directory.`);
