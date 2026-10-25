@@ -2,6 +2,7 @@ services:
   - type: web
     name: califnco-admin-fullstack1
     runtime: node
+    branch: main
     buildCommand: npm ci && npm run build:deployment
     startCommand: npm start
     healthCheckPath: /api/health
